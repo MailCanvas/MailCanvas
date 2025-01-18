@@ -10,6 +10,7 @@ interface MailCardProps {
 }
 
 const MailCard: React.FC<MailCardProps> = ({ id, title, tags, writer }) => {
+  console.log(id);
   return (
     <div
       className="w-[300px] h-[200px] bg-[#4caf50] p-3 rounded-lg flex flex-col justify-between text-primary

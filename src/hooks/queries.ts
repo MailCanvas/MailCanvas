@@ -62,8 +62,10 @@ export function useGetForms({ tags, sortByCopyCount }: GetDataProps) {
         if (offset > 0) {
           const offsetQuery = query(formsQuery, startAt(offset));
           const snapshot = await getDocs(offsetQuery);
-          const forms = snapshot.docs.map((doc) => doc.data()) as Form[];
-
+          const forms = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          })) as Form[];
           return {
             forms,
             nextPage:
@@ -74,7 +76,10 @@ export function useGetForms({ tags, sortByCopyCount }: GetDataProps) {
 
         // Get the documents for first page
         const snapshot = await getDocs(formsQuery);
-        const forms = snapshot.docs.map((doc) => doc.data()) as Form[];
+        const forms = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Form[];
 
         return {
           forms,
