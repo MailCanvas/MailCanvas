@@ -26,7 +26,7 @@ const MailCard: React.FC<MailCardProps> = ({ id, title, tags, writer }) => {
           {title}
         </h3>
         <div
-          className="flex flex-row gap-2 justify-start flex-wrap overflow-x-auto scrollbar-hide"
+          className="flex flex-row gap-2 justify-start flex-wrap overflow-x-auto scrollbar-none"
           style={{ gridRow: 2 }}
         >
           {tags.map((tag, index) => (
