@@ -9,7 +9,8 @@ import {
   query,
   where,
   QueryConstraint,
-  startAt,
+  DocumentData,
+  startAfter,
 } from "firebase/firestore";
 
 const ITEMS_PER_PAGE = 10;
@@ -19,20 +20,24 @@ type GetDataProps = {
   sortByCopyCount: boolean;
 };
 
+type PageParam = {
+  page: number;
+  lastDoc: DocumentData | null;
+};
+
 type GetFormsResponseType = {
   forms: Form[];
-  nextPage: number | undefined;
-  totalCount: number;
+  currentPage: number;
+  lastDoc: DocumentData | null;
 };
 
 export function useGetForms({ tags, sortByCopyCount }: GetDataProps) {
   return useInfiniteQuery({
     queryKey: ["forms", tags, sortByCopyCount],
-    queryFn: async ({ pageParam = 1 }): Promise<GetFormsResponseType> => {
+    queryFn: async ({
+      pageParam = { page: 1, lastDoc: null },
+    }): Promise<GetFormsResponseType> => {
       try {
-        // Calculate the offset
-        const offset = (pageParam - 1) * ITEMS_PER_PAGE;
-
         // Create an array to hold all query constraints
         const queryConstraints: QueryConstraint[] = [limit(ITEMS_PER_PAGE)];
 
@@ -48,34 +53,23 @@ export function useGetForms({ tags, sortByCopyCount }: GetDataProps) {
           queryConstraints.push(where("tags", "array-contains-any", tags));
         }
 
+        // If we have a lastDoc, add startAfter constraint
+        if (pageParam.lastDoc) {
+          queryConstraints.push(startAfter(pageParam.lastDoc));
+        }
+
         // Create the query with all constraints
         const formsQuery = query(collection(db, "forms"), ...queryConstraints);
 
-        // Get total count (for first page only)
-        let totalCount = 0;
-        if (pageParam === 1) {
-          const countSnapshot = await getDocs(formsQuery);
-          totalCount = countSnapshot.size;
-        }
-
-        // Add offset using startAt
-        if (offset > 0) {
-          const offsetQuery = query(formsQuery, startAt(offset));
-          const snapshot = await getDocs(offsetQuery);
-          const forms = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          })) as Form[];
-          return {
-            forms,
-            nextPage:
-              forms.length === ITEMS_PER_PAGE ? pageParam + 1 : undefined,
-            totalCount,
-          };
-        }
-
-        // Get the documents for first page
+        // Get the documents
         const snapshot = await getDocs(formsQuery);
+
+        // Get the last document for next page
+        const lastDoc = snapshot.empty
+          ? null
+          : snapshot.docs[snapshot.docs.length - 1];
+
+        // Transform the documents into our Form type
         const forms = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -83,16 +77,24 @@ export function useGetForms({ tags, sortByCopyCount }: GetDataProps) {
 
         return {
           forms,
-          nextPage: forms.length === ITEMS_PER_PAGE ? pageParam + 1 : undefined,
-          totalCount,
+          currentPage: pageParam.page,
+          lastDoc,
         };
       } catch (error) {
         console.error("Error fetching forms:", error);
         throw error;
       }
     },
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => lastPage.nextPage,
+    initialPageParam: { page: 1, lastDoc: null },
+    getNextPageParam: (lastPage): PageParam | undefined => {
+      if (!lastPage.lastDoc || lastPage.forms.length < ITEMS_PER_PAGE) {
+        return undefined;
+      }
+      return {
+        page: lastPage.currentPage + 1,
+        lastDoc: lastPage.lastDoc,
+      };
+    },
     gcTime: 300 * 1000, // 5 minutes
     staleTime: 60 * 1000, // 1 minute
   });
