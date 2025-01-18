@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useGetForms } from "@/hooks/queries";
 import MailCard from "@/components/ui/MailCard";
+import Search from "@/components/ui/Search";
 export default function Home() {
   // const title, tags, sortByCopyCount
   const [title, setTitle] = useState<string>("");
@@ -15,6 +16,7 @@ export default function Home() {
 
   return (
     <div>
+      <Search />
       {data.pages.map((page, i) => (
         <div key={i}>
           {page.forms.map((form, idx) => (
