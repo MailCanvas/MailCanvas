@@ -10,3 +10,7 @@ export interface Form {
   Writer: string;
   tags: string[];
 }
+
+export interface DetailProps {
+  params: { id: string };
+}
