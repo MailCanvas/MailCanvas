@@ -1,6 +1,7 @@
 import { db } from "@/firebase/firebaseClient";
 import { DetailProps, Form } from "@/types/types";
 import { doc, getDoc } from "firebase/firestore";
+import CopyButton from "../_components/CopyButton";
 
 export default async function Page({ params }: DetailProps) {
   const { id } = await params;
@@ -11,5 +12,15 @@ export default async function Page({ params }: DetailProps) {
     return <div>404</div>;
   }
 
-  return <div>{data.Title}</div>;
+  return (
+    <div>
+      <div>{data.Title}</div>
+      <div>{data.Content}</div>
+      <div>{data.CopiedCount}</div>
+      <div>{data.Email}</div>
+      <div>{data.Writer}</div>
+      <div>{data.tags}</div>
+      <CopyButton data={data.Content} />
+    </div>
+  );
 }
