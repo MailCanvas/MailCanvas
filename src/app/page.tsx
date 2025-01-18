@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useGetForms } from "@/hooks/queries";
+import MailCard from "@/components/ui/MailCard";
 export default function Home() {
   // const title, tags, sortByCopyCount
   const [title, setTitle] = useState<string>("");
@@ -14,17 +15,21 @@ export default function Home() {
 
   return (
     <div>
-      {data.pages.map((page, i) => (
-        <div key={i}>
-          {page.forms.map((form, idx) => (
-            <div key={idx} className="border p-4 mb-4 rounded-lg">
-              <h2 className="text-xl font-bold">{form.Title}</h2>
-              <p>{form.Content}</p>
-              <span className="text-gray-500">{form.CopiedCount}</span>
-            </div>
-          ))}
-        </div>
-      ))}
+      <div className="grid gird-cols-3">
+        {data.pages.map((page, i) => (
+          <div key={i}>
+            {page.forms.map((form, idx) => (
+              <MailCard
+                key={idx}
+                id={form.id}
+                title={form.Title}
+                tags={form.tags}
+                writer={form.Writer}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
 
       {hasNextPage && (
         <button

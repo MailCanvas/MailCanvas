@@ -1,4 +1,5 @@
 export interface Form {
+  id: string;
   Content: string;
   CopiedCount: number;
   Email: string;

@@ -2,6 +2,7 @@ import Nav from "@/components/ui/Nav";
 import Footer from "@/components/ui/Footer";
 import RQProvider from "@/components/RQProvider";
 import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "MailCanvas",
