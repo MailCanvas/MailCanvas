@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 export default async function Page({ params }: DetailProps) {
   const { id } = await params;
   const _doc = await getDoc(doc(db, "forms", id));
-  const data = _doc.data();
+  const data = _doc.data() as Form;
 
   if (!data) {
     return <div>404</div>;
