@@ -19,3 +19,19 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+#scrollbar-1::-webkit-scrollbar {
+  width: 10px;
+}
+
+#scrollbar-1::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #e7e7e7;
+}
+
+#scrollbar-1::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: #b2afaf;
+}
