@@ -58,7 +58,10 @@ export default function Home() {
       {/* Main Screen */}
       <div className="h-screen w-full pl-3 p-3">
         <Search />
-        <div className="h-[90vh] mt-3 w-full overflow-y-scroll grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 justify-items-center gap-3">
+        <div
+          id="scrollbar-1"
+          className="h-[90vh] mt-3 w-full overflow-y-scroll grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 justify-items-center gap-3"
+        >
           {data.pages
             .flatMap((page) => page.forms)
             .map((form, idx) => (
