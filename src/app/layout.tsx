@@ -1,4 +1,3 @@
-import Nav from "@/components/ui/Nav";
 import Footer from "@/components/ui/Footer";
 import RQProvider from "@/components/RQProvider";
 import type { Metadata } from "next";
@@ -18,9 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <RQProvider>
-          <Nav />
-          <main className="mx-[60px]">{children}</main>
-          <Footer />
+          <main>{children}</main>
         </RQProvider>
       </body>
     </html>
