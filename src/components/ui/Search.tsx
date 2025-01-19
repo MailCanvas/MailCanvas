@@ -1,7 +1,13 @@
 import { useState } from "react";
 
-export default function Search() {
-  const [searchText, setSearchText] = useState("");
+export default function Search({
+  data,
+  onChange,
+}: {
+  data: string;
+  onChange: any;
+}) {
+  const [searchText, setSearchText] = useState(data);
   return (
     <div className="relative">
       <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -28,7 +34,10 @@ export default function Search() {
         placeholder="제목으로 검색하세요..."
         required
         value={searchText} // 상태로 바인딩된 값
-        onChange={(e) => setSearchText(e.target.value)} // 입력값이 변경될 때마다 상태 업데이트
+        onChange={(e) => {
+          setSearchText(e.target.value);
+          onChange(e.target.value);
+        }} // 입력값이 변경될 때마다 상태 업데이트
       />
     </div>
   );
