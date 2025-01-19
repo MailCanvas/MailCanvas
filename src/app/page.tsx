@@ -5,6 +5,7 @@ import MailCard from "@/components/ui/MailCard";
 import Search from "@/components/ui/Search";
 import ClosedNavigation from "@/components/ui/Navigation/ClosedNavigation";
 import OpenedNavigation from "@/components/ui/Navigation/OpenedNavigation";
+import { Form } from "@/types/types";
 export default function Home() {
   // const title, tags, sortByCopyCount
   const [title, setTitle] = useState<string>("");
@@ -57,13 +58,14 @@ export default function Home() {
 
       {/* Main Screen */}
       <div className="h-screen w-full pl-3 p-3">
-        <Search />
+        <Search data={title} onChange={setTitle} />
         <div
           id="scrollbar-1"
           className="h-[90vh] mt-3 overflow-y-scroll grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-5"
         >
           {data.pages
             .flatMap((page) => page.forms)
+            .filter((el: Form) => el.Title.includes(title))
             .map((form, idx) => (
               <MailCard
                 key={idx}
