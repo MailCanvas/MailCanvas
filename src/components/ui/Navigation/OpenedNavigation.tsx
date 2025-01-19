@@ -8,40 +8,40 @@ const OpenedNavigation: React.FC<OpenedNavigationProps> = ({
   setIsNavBarOpen,
 }) => {
   return (
-    <div>
-      <div className="grid" style={{ gridTemplateRows: "35px 1fr" }}>
-        {/* Header */}
-        <div className="flex justify-end">
-          <button
-            type="button"
-            className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none 
+    <div className="h-screen grid gird-cols-1">
+      {/* Header */}
+      <div className="flex justify-end">
+        <button
+          type="button"
+          className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none 
       focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center ml-2
       justify-center me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800
       h-[35px] mt-1
       "
-            onClick={() => setIsNavBarOpen(false)}
+          onClick={() => setIsNavBarOpen(false)}
+        >
+          <svg
+            className="w-4 h-4"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
           >
-            <svg
-              className="w-4 h-4"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 5H1m0 0l4 4M1 5l4-4"
-              />
-            </svg>
-            <span className="sr-only">Icon description</span>
-          </button>
-        </div>
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 5H1m0 0l4 4M1 5l4-4"
+            />
+          </svg>
+          <span className="sr-only">Icon description</span>
+        </button>
+      </div>
 
-        {/* Body */}
-        <div className="flex flex-col items-center justify-center h-screen">
+      {/* Body */}
+      <div className="h-full">
+        <div className="flex flex-col items-center justify-items-center h-full">
           <h1 style={{ fontWeight: "bold", fontSize: 60 }}>MailCanvas</h1>
           <h3 style={{ fontWeight: "bold", fontSize: 20 }}>
             어려운 메일보내기를 간편하게
