@@ -13,7 +13,7 @@ import {
   startAfter,
 } from "firebase/firestore";
 
-const ITEMS_PER_PAGE = 15;
+const ITEMS_PER_PAGE = 12;
 
 type GetDataProps = {
   tags: string[];

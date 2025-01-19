@@ -60,7 +60,7 @@ export default function Home() {
         <Search />
         <div
           id="scrollbar-1"
-          className="h-[90vh] mt-3 w-full overflow-y-scroll grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 justify-items-center gap-3"
+          className="h-[90vh] mt-3 w-full overflow-y-scroll grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-5"
         >
           {data.pages
             .flatMap((page) => page.forms)
