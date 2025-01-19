@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useGetForms } from "@/hooks/queries";
 import MailCard from "@/components/ui/MailCard";
 import Search from "@/components/ui/Search";
@@ -11,19 +11,43 @@ export default function Home() {
   const [tags, setTags] = useState<string[]>([]);
   const [sortByCopyCount, setSortByCopyCount] = useState<boolean>(true);
   const [IsNavBarOpen, setIsNavBarOpen] = useState<boolean>(true);
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-    useGetForms({ tags, sortByCopyCount });
+  const loader = useRef<IntersectionObserver | null>(null);
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useGetForms({ tags, sortByCopyCount });
 
   if (status === "pending") return <div>Loading...</div>;
   if (status === "error") return <div>Error loading posts</div>;
 
+  const fetchWithDelay = () => {
+    setTimeout(() => {
+      fetchNextPage();
+    }, 1000);
+  };
+
+  const observer = (node: HTMLDivElement) => {
+    if (isFetching || isFetchingNextPage) return;
+    if (loader.current) loader.current.disconnect();
+
+    loader.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasNextPage) {
+        fetchWithDelay();
+      }
+    });
+
+    if (node) loader.current.observe(node);
+  };
+
   return (
-    <div
-      className="bg-[#a2cf6e] h-screen grid "
-      style={{ gridTemplateColumns: IsNavBarOpen ? "1fr 1.3fr" : "50px 1fr" }}
-    >
+    <div className="bg-[#a2cf6e] h-full flex">
       {/* Navigation Bar */}
-      <div style={{ boxShadow: "5px 0 5px rgba(0, 0, 0, 0.2)" }}>
+      <div className="shadow-md">
         {IsNavBarOpen ? (
           <OpenedNavigation setIsNavBarOpen={setIsNavBarOpen} />
         ) : (
@@ -32,11 +56,12 @@ export default function Home() {
       </div>
 
       {/* Main Screen */}
-      <div className="mx-5">
+      <div className="h-screen w-full pl-3 p-3">
         <Search />
-        {data.pages.map((page, i) => (
-          <div key={i}>
-            {page.forms.map((form, idx) => (
+        <div className="h-[90vh] mt-3 w-full overflow-y-scroll grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 justify-items-center gap-3">
+          {data.pages
+            .flatMap((page) => page.forms)
+            .map((form, idx) => (
               <MailCard
                 key={idx}
                 id={form.id}
@@ -45,18 +70,11 @@ export default function Home() {
                 writer={form.Writer}
               />
             ))}
-          </div>
-        ))}
-
-        {hasNextPage && (
-          <button
-            onClick={() => fetchNextPage()}
-            disabled={isFetchingNextPage}
-            className="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50"
-          >
-            {isFetchingNextPage ? "Loading more..." : "Load More"}
-          </button>
-        )}
+          <div
+            ref={observer}
+            className="my-3 flex min-w-[1080px] items-center justify-center text-2xl"
+          />
+        </div>
       </div>
     </div>
   );

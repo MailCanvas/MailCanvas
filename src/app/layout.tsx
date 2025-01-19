@@ -1,4 +1,4 @@
-import Footer from "@/components/ui/Footer";
+// import Footer from "@/components/ui/Footer";
 import RQProvider from "@/components/RQProvider";
 import type { Metadata } from "next";
 import "./globals.css";
