@@ -55,7 +55,7 @@ export function useGetForms({ sortByCopyCount }: GetDataProps) {
         // Create the query with all constraints
         const formsQuery = query(
           collection(db, "forms"),
-          // where("IsValid", "==", true),
+          where("IsValid", "==", true),
           ...queryConstraints
         );
 

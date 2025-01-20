@@ -9,6 +9,7 @@ export const createForm = async (_data: {
   writer: string;
   tags: string[];
   replacementTags: string[];
+  IsEmailVisible: boolean;
 }) => {
   const time = new Date();
   const data: Form = {
@@ -24,6 +25,7 @@ export const createForm = async (_data: {
     tags: _data.tags,
     replacementTags: _data.replacementTags,
     timestamp: time.getTime(),
+    IsEmailVisible: _data.IsEmailVisible,
   };
   const res = await addDoc(collection(db, "forms"), data);
   return res;

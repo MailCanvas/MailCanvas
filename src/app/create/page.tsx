@@ -1,11 +1,14 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { createForm } from "./_lib/lib";
+import { usePathname, useRouter } from "next/navigation";
 
 const BlogPostForm = () => {
+  const router = useRouter();
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [IsEmailVisible, SetIsEmailVisible] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [tagInput, setTagInput] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
@@ -63,8 +66,13 @@ const BlogPostForm = () => {
       writer: name,
       tags: tags,
       replacementTags: replacements,
+      IsEmailVisible: IsEmailVisible,
     };
     createForm(_data);
+    alert(
+      "양식이 정상적으로 제출되었습니다. 양식은 관리자의 승인을 거쳐 업로드 됩니다."
+    );
+    router.push("/");
   };
 
   return (
@@ -201,7 +209,7 @@ const BlogPostForm = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200"
-                placeholder="작성자 이름 또는 닉네임을 입력하세요"
+                placeholder="닉네임을 입력하세요. 사용자에게 실제로 보여질 닉네임이므로, 실명을 사용하지 말아주세요."
               />
             </div>
             <div className="space-y-2">
@@ -215,6 +223,38 @@ const BlogPostForm = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200"
                 placeholder="이메일을 입력하세요"
               />
+            </div>
+            <div className="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+              <div className="inline-flex items-center">
+                <label className="flex items-center cursor-pointer relative">
+                  <input
+                    type="checkbox"
+                    checked={IsEmailVisible}
+                    onChange={(e) => SetIsEmailVisible(!IsEmailVisible)}
+                    className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-green-600 checked:border-green-600"
+                    id="check4"
+                  />
+                  <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-3.5 w-3.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  </span>
+                </label>
+              </div>
+              <label className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                사용자들에게 이메일을 공개하여 폼에 대한 피드백을 받습니다.
+              </label>
             </div>
           </div>
 

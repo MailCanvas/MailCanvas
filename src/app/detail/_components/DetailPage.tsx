@@ -111,13 +111,17 @@ export function DetailPage({ initialData }: { initialData: Form }) {
               </label>
               <div className="flex flex-col space-y-2 px-4 py-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">이름:</span>
+                  <span className="text-gray-500">닉네임:</span>
                   <span className="text-gray-700">{initialData.Writer}</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-500">이메일:</span>
-                  <span className="text-gray-700">{initialData.Email}</span>
-                </div>
+                {initialData.IsEmailVisible ? (
+                  <div className="flex items-center space-x-2">
+                    <span className="text-gray-500">이메일:</span>
+                    <span className="text-gray-700">{initialData.Email}</span>
+                  </div>
+                ) : (
+                  <div />
+                )}
               </div>
             </div>
           </div>
