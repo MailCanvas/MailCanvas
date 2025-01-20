@@ -9,8 +9,6 @@ export interface Form {
   Title: string;
   Writer: string;
   tags: string[];
-}
-
-export interface DetailProps {
-  params: { id: string };
+  replacementTags: string[];
+  timestamp: number;
 }
