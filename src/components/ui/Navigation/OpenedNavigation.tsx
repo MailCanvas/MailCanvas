@@ -8,7 +8,7 @@ const OpenedNavigation: React.FC<OpenedNavigationProps> = ({
   setIsNavBarOpen,
 }) => {
   return (
-    <div className="h-screen grid gird-cols-1">
+    <div className="h-screen grid gird-cols-1 min-h-screen bg-gradient-to-br from-green-300 to-green-100">
       {/* Header */}
       <div className="flex justify-end">
         <button
@@ -41,7 +41,7 @@ const OpenedNavigation: React.FC<OpenedNavigationProps> = ({
 
       {/* Body */}
       <div className="h-full">
-        <div className="flex flex-col items-center justify-items-center h-full">
+        <div className="flex flex-col items-center justify-items-center h-full p-10">
           <h1 style={{ fontWeight: "bold", fontSize: 60 }}>MailCanvas</h1>
           <h3 style={{ fontWeight: "bold", fontSize: 20 }}>
             어려운 메일보내기를 간편하게

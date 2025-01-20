@@ -16,7 +16,6 @@ import {
 const ITEMS_PER_PAGE = 12;
 
 type GetDataProps = {
-  tags: string[];
   sortByCopyCount: boolean;
 };
 
@@ -31,9 +30,9 @@ type GetFormsResponseType = {
   lastDoc: DocumentData | null;
 };
 
-export function useGetForms({ tags, sortByCopyCount }: GetDataProps) {
+export function useGetForms({ sortByCopyCount }: GetDataProps) {
   return useInfiniteQuery({
-    queryKey: ["forms", tags, sortByCopyCount],
+    queryKey: ["forms", sortByCopyCount],
     queryFn: async ({
       pageParam = { page: 1, lastDoc: null },
     }): Promise<GetFormsResponseType> => {
@@ -45,12 +44,7 @@ export function useGetForms({ tags, sortByCopyCount }: GetDataProps) {
         if (sortByCopyCount) {
           queryConstraints.push(orderBy("CopiedCount", "desc"));
         } else {
-          queryConstraints.push(orderBy("Title", "asc"));
-        }
-
-        // Add tags filter only if tags array is not empty
-        if (tags && tags.length > 0) {
-          queryConstraints.push(where("tags", "array-contains-any", tags));
+          queryConstraints.push(orderBy("timestamp", "desc"));
         }
 
         // If we have a lastDoc, add startAfter constraint
@@ -59,7 +53,11 @@ export function useGetForms({ tags, sortByCopyCount }: GetDataProps) {
         }
 
         // Create the query with all constraints
-        const formsQuery = query(collection(db, "forms"), ...queryConstraints);
+        const formsQuery = query(
+          collection(db, "forms"),
+          // where("IsValid", "==", true),
+          ...queryConstraints
+        );
 
         // Get the documents
         const snapshot = await getDocs(formsQuery);
@@ -71,8 +69,8 @@ export function useGetForms({ tags, sortByCopyCount }: GetDataProps) {
 
         // Transform the documents into our Form type
         const forms = snapshot.docs.map((doc) => ({
-          id: doc.id,
           ...doc.data(),
+          id: doc.id,
         })) as Form[];
 
         return {

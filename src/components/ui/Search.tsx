@@ -5,7 +5,7 @@ export default function Search({
   onChange,
 }: {
   data: string;
-  onChange: any;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [searchText, setSearchText] = useState(data);
   return (

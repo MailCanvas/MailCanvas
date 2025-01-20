@@ -21,7 +21,7 @@ export default function Home() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useGetForms({ tags, sortByCopyCount });
+  } = useGetForms({ sortByCopyCount });
 
   if (status === "pending") return <div>Loading...</div>;
   if (status === "error") return <div>Error loading posts</div>;
@@ -46,7 +46,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#a2cf6e] h-full flex">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-pink-50 h-full flex">
       {/* Navigation Bar */}
       <div className="shadow-md">
         {IsNavBarOpen ? (
@@ -61,7 +61,7 @@ export default function Home() {
         <Search data={title} onChange={setTitle} />
         <div
           id="scrollbar-1"
-          className="h-[90vh] mt-3 overflow-y-scroll grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-5"
+          className="h-[90vh] mt-3 overflow-x-clip overflow-y-scroll grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-5"
         >
           {data.pages
             .flatMap((page) => page.forms)
@@ -77,8 +77,10 @@ export default function Home() {
             ))}
           <div
             ref={observer}
-            className="my-3 flex min-w-[1080px] items-center justify-center text-2xl"
-          />
+            className="my-3 flex min-w-[1080px] items-center justify-center text-2xl pointer-events-none"
+          >
+            <div />
+          </div>
         </div>
       </div>
     </div>
