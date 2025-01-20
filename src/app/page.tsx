@@ -46,9 +46,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-pink-50 h-full flex">
+    <div className="bg-gradient-to-br from-green-50 to-pink-50 md:flex">
       {/* Navigation Bar */}
-      <div className="shadow-md">
+      <div className="h-screen shadow-md bg-gradient-to-br from-green-300 to-green-100">
         {IsNavBarOpen ? (
           <OpenedNavigation setIsNavBarOpen={setIsNavBarOpen} />
         ) : (
@@ -57,7 +57,7 @@ export default function Home() {
       </div>
 
       {/* Main Screen */}
-      <div className="h-screen w-full pl-3 p-3">
+      <div className="h-full w-full pl-3 p-3">
         <Search data={title} onChange={setTitle} />
         <div
           id="scrollbar-1"
