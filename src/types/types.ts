@@ -5,6 +5,7 @@ export interface Form {
   Email: string;
   IsOfficial: boolean;
   IsValid: boolean;
+  IsEmailVisible: boolean;
   LikeCount: number;
   Title: string;
   Writer: string;
