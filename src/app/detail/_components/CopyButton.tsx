@@ -9,7 +9,7 @@ const CopyButton = ({ id, data }: { data: string; id: string }) => {
   const [copied, setCopied] = useState<boolean>(false);
   return (
     <button
-      className="px-3 py-1 text-white text-bold rounded-md shadow-md bg-blue-500"
+      className="px-3 py-1 text-white text-bold rounded-md shadow-md bg-green-500"
       onClick={async () => {
         if (!copied) {
           copyToClipboard(data);
