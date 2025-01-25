@@ -59,10 +59,7 @@ export default function Home() {
       {/* Main Screen */}
       <div className="h-full w-full pl-3 p-3">
         <Search data={title} onChange={setTitle} />
-        <div
-          id="scrollbar-1"
-          className="h-[90vh] mt-3 overflow-x-clip overflow-y-scroll grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-5"
-        >
+        <div id="wrap-panel" className="flex flex-wrap gap-5 justify-start">
           {data.pages
             .flatMap((page) => page.forms)
             .filter((el: Form) => el.Title.includes(title))
@@ -75,12 +72,6 @@ export default function Home() {
                 writer={form.Writer}
               />
             ))}
-          <div
-            ref={observer}
-            className="my-3 flex min-w-[1080px] items-center justify-center text-2xl pointer-events-none"
-          >
-            <div />
-          </div>
         </div>
       </div>
     </div>
