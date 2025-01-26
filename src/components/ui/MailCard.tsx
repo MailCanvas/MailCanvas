@@ -26,7 +26,7 @@ const MailCard: React.FC<MailCardProps> = ({ id, title, tags, writer }) => {
           id="scrollbar-1"
         >
           {tags.map((tag, index) => (
-            <Chip tag={tag} key={index} />
+            <Chip tag={tag} key={index} useLink={false} />
           ))}
         </div>
 

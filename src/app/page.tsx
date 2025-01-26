@@ -5,6 +5,7 @@ import MailCard from "@/components/ui/MailCard";
 import Search from "@/components/ui/Search";
 import ClosedNavigation from "@/components/ui/Navigation/ClosedNavigation";
 import OpenedNavigation from "@/components/ui/Navigation/OpenedNavigation";
+import Chip from "@/components/ui/Chip";
 import Loading from "./loading";
 import { Form } from "@/types/types";
 export default function Home() {
@@ -25,7 +26,7 @@ export default function Home() {
   } = useGetForms({ sortByCopyCount });
 
   if (status === "pending") return <Loading />;
-  if (status === "error") return <div>Error loading posts</div>;
+  if (status === "error") return <div>500 데이터를 불러오지 못했습니다.</div>;
 
   const fetchWithDelay = () => {
     setTimeout(() => {
@@ -59,7 +60,26 @@ export default function Home() {
 
       {/* Main Screen */}
       <div className="h-full w-full pl-3 p-3">
+        {/* 검색바 */}
         <Search data={title} onChange={setTitle} />
+
+        {/* chip버튼 필터 */}
+        <div className="space-x-1.5 mt-5">
+          <Chip tag="성적이의신청" useLink={true} />
+          <Chip tag="학점" useLink={true} />
+          <Chip tag="수강신청" useLink={true} />
+          <Chip tag="팀플" useLink={true} />
+          <Chip tag="과제" useLink={true} />
+          <Chip tag="연구" useLink={true} />
+          <Chip tag="대학원" useLink={true} />
+          <Chip tag="복수전공" useLink={true} />
+          <Chip tag="휴학" useLink={true} />
+          <Chip tag="장학금" useLink={true} />
+          <Chip tag="교환학생" useLink={true} />
+          <Chip tag="학술대회" useLink={true} />
+        </div>
+
+        {/* 메일 리스트 */}
         <div id="wrap-panel" className="flex flex-wrap gap-5 justify-start">
           {data.pages
             .flatMap((page) => page.forms)

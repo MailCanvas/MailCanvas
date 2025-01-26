@@ -1,17 +1,26 @@
 import React from "react";
+import Link from "next/link";
 
 interface ChipProps {
   tag: string;
+  useLink: boolean;
 }
 
-const Chip: React.FC<ChipProps> = ({ tag }) => {
-  return (
-    <span
-      className="flex bg-white text-[#4caf50] border-2 border-[#4caf50] rounded-full px-3 py-1
-  text-sm hover:bg-[#6fbf73] hover:text-white transition-colors duration-300 h-[25px] items-center justify-center"
-    >
+const Chip: React.FC<ChipProps> = ({ tag, useLink }) => {
+  const chipContent = (
+    <span className="inline-flex items-center justify-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800 h-[25px] leading-[25px]">
       {tag}
     </span>
+  );
+
+  return (
+    <>
+      {useLink ? (
+        <Link href={{ pathname: "/", query: { tag } }}>{chipContent}</Link>
+      ) : (
+        chipContent
+      )}
+    </>
   );
 };
 

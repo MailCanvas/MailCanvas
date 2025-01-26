@@ -2,6 +2,7 @@
 import { Form } from "@/types/types";
 import { useEffect, useState } from "react";
 import CopyButton from "../_components/CopyButton";
+import Chip from "@/components/ui/Chip";
 
 export function DetailPage({ initialData }: { initialData: Form }) {
   const [replacements, setReplacements] = useState<{ [key: string]: string }>(
@@ -54,12 +55,7 @@ export function DetailPage({ initialData }: { initialData: Form }) {
           {/* Tags Section */}
           <div className="flex flex-wrap gap-2">
             {initialData.tags?.map((tag, index) => (
-              <span
-                key={index}
-                className="px-3 py-1 rounded-full text-sm bg-green-100 text-green-800"
-              >
-                {tag}
-              </span>
+              <Chip tag={tag} key={index} useLink={true} />
             ))}
           </div>
 
