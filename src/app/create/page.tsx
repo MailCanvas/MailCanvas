@@ -2,10 +2,12 @@
 import React, { useState, useRef } from "react";
 import { createForm } from "./_lib/lib";
 import { usePathname, useRouter } from "next/navigation";
+import RecommendedTags from "@/lib/recommended_tags";
 
 const BlogPostForm = () => {
   const router = useRouter();
   const [title, setTitle] = useState<string>("");
+  const [filteredTags, setFilteredTags] = useState<string[]>([]);
   const [content, setContent] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [IsEmailVisible, SetIsEmailVisible] = useState<boolean>(false);
@@ -21,6 +23,10 @@ const BlogPostForm = () => {
       setTags([...tags, tagInput.trim()]);
       setTagInput("");
     }
+  };
+
+  const handleAddTagDirectly = (tag: string) => {
+    setTags([...tags, tag.trim()]);
   };
 
   const handleRemoveTag = (tagToRemove: string) => {
@@ -43,6 +49,18 @@ const BlogPostForm = () => {
     );
     // Remove from content as well
     setContent(content.replaceAll(`\${${replacementToRemove}}$`, ""));
+  };
+
+  const handleTagInput = (input: string) => {
+    setTagInput(input);
+    if (input) {
+      const filtered = RecommendedTags.filter((tag) =>
+        tag.toLowerCase().includes(input.toLowerCase())
+      );
+      setFilteredTags(filtered);
+    } else {
+      setFilteredTags([]);
+    }
   };
 
   const insertReplacementTag = (replacement: string) => {
@@ -109,10 +127,26 @@ const BlogPostForm = () => {
               <input
                 type="text"
                 value={tagInput}
-                onChange={(e) => setTagInput(e.target.value)}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200"
+                onChange={(e) => handleTagInput(e.target.value)}
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-200 w-full"
                 placeholder="추가할 태그를 입력하세요"
               />
+
+              {/* 필터링된 태그 목록을 input 아래에 표시 */}
+              {filteredTags.length > 0 && (
+                <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md max-h-40 overflow-y-auto z-10">
+                  {filteredTags.map((tag, index) => (
+                    <div
+                      key={index}
+                      className="p-2 cursor-pointer hover:bg-gray-100 rounded-md"
+                      onClick={() => handleAddTagDirectly(tag)} // 클릭 시 태그를 입력란에 넣기
+                    >
+                      {tag}
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <button
                 type="button"
                 onClick={handleAddTag}
