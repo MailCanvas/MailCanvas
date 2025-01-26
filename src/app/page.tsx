@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <div className="bg-gradient-to-br from-green-50 to-pink-50 md:flex">
       {/* Navigation Bar */}
-      <div className="h-screen shadow-md bg-gradient-to-br from-green-300 to-green-100">
+      <div className="h-screen bg-gradient-to-b from-green-300 to-purple-300">
         {IsNavBarOpen ? (
           <OpenedNavigation setIsNavBarOpen={setIsNavBarOpen} />
         ) : (
@@ -85,7 +85,7 @@ export default function Home() {
         </div>
 
         {/* 메일 리스트 */}
-        <div id="wrap-panel" className="flex flex-wrap gap-5 justify-start">
+        <div id="wrap-panel" className="flex flex-wrap gap-5 justify-center">
           {data.pages
             .flatMap((page) => page.forms)
             .filter((el: Form) => el.Title.includes(title))

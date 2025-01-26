@@ -3,6 +3,7 @@ import RQProvider from "@/components/RQProvider";
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/ui/Header";
+import Footer from "@/components/ui/Footer";
 
 export const metadata: Metadata = {
   title: "MailCanvas",
@@ -21,6 +22,7 @@ export default function RootLayout({
         <RQProvider>
           <main>{children}</main>
         </RQProvider>
+        <Footer />
       </body>
     </html>
   );
