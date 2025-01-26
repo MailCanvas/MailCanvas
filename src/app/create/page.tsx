@@ -76,20 +76,27 @@ const BlogPostForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const _data = {
-      content: content,
-      email: email,
-      title: title,
-      writer: name,
-      tags: tags,
-      replacementTags: replacements,
-      IsEmailVisible: IsEmailVisible,
-    };
-    createForm(_data);
-    alert(
-      "양식이 정상적으로 제출되었습니다. 양식은 관리자의 승인을 거쳐 업로드 됩니다."
-    );
-    router.push("/");
+
+    // 사용자에게 제출 확인을 요청
+    const isConfirmed = window.confirm("양식을 제출하시겠습니까?");
+
+    if (isConfirmed) {
+      const _data = {
+        content: content,
+        email: email,
+        title: title,
+        writer: name,
+        tags: tags,
+        replacementTags: replacements,
+        IsEmailVisible: IsEmailVisible,
+      };
+
+      createForm(_data);
+      alert(
+        "양식이 정상적으로 제출되었습니다. 양식은 관리자의 승인을 거쳐 업로드 됩니다."
+      );
+      router.push("/"); // 제출 후 이동
+    }
   };
 
   return (
