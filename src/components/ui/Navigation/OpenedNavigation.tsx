@@ -42,8 +42,12 @@ const OpenedNavigation: React.FC<OpenedNavigationProps> = ({
       {/* Body */}
       <div className="flex flex-grow justify-center items-center">
         <div className="p-10">
-          <h1 className="font-extrabold text-5xl text-center">MailCanvas</h1>
-          <h3 className="font-bold text-xl">어려운 메일보내기를 간편하게</h3>
+          <h1 className="font-extrabold text-5xl text-center text-slate-100">
+            MailCanvas
+          </h1>
+          <h3 className="font-bold text-xl text-slate-100">
+            어려운 메일보내기를 간편하게
+          </h3>
           <div className="flex justify-center">
             <Link href="/create">
               <button
