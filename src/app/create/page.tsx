@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { createForm } from "./_lib/lib";
 import { usePathname, useRouter } from "next/navigation";
 import RecommendedTags from "@/lib/recommended_tags";
+import Tooltip from "@/components/ui/ToolTip";
 
 const BlogPostForm = () => {
   const router = useRouter();
@@ -179,9 +180,25 @@ const BlogPostForm = () => {
 
           {/* Replacement Tags Section */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
-              치환 태그
-            </label>
+            <div className="flex gap-3">
+              <label className="block text-sm font-medium text-gray-700">
+                치환 태그
+              </label>
+              <Tooltip text="explain text">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 30 30"
+                  fill="#d1d5db"
+                >
+                  <path d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16,21h-2v-7h2V21z M15,11.5 c-0.828,0-1.5-0.672-1.5-1.5s0.672-1.5,1.5-1.5s1.5,0.672,1.5,1.5S15.828,11.5,15,11.5z"></path>
+                </svg>
+              </Tooltip>
+            </div>
+
             <div className="flex flex-col gap-2">
               <input
                 type="text"
