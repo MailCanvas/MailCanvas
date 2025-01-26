@@ -76,30 +76,33 @@ const BlogPostForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ title, content, email, name, tags, replacements });
-    const _data = {
-      content: content,
-      email: email,
-      title: title,
-      writer: name,
-      tags: tags,
-      replacementTags: replacements,
-      IsEmailVisible: IsEmailVisible,
-    };
-    createForm(_data);
-    alert(
-      "양식이 정상적으로 제출되었습니다. 양식은 관리자의 승인을 거쳐 업로드 됩니다."
-    );
-    router.push("/");
+
+    // 사용자에게 제출 확인을 요청
+    const isConfirmed = window.confirm("양식을 제출하시겠습니까?");
+
+    if (isConfirmed) {
+      const _data = {
+        content: content,
+        email: email,
+        title: title,
+        writer: name,
+        tags: tags,
+        replacementTags: replacements,
+        IsEmailVisible: IsEmailVisible,
+      };
+
+      createForm(_data);
+      alert(
+        "양식이 정상적으로 제출되었습니다. 양식은 관리자의 승인을 거쳐 업로드 됩니다."
+      );
+      router.push("/"); // 제출 후 이동
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-pink-50 p-6">
       <div className="max-w-3xl mx-auto">
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-6 bg-white rounded-2xl shadow-xl p-8"
-        >
+        <div className="space-y-6 bg-white rounded-2xl shadow-xl p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
             새 양식 작성하기
           </h1>
@@ -295,11 +298,12 @@ const BlogPostForm = () => {
           {/* Submit Button */}
           <button
             type="submit"
+            onClick={handleSubmit}
             className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-green-300 text-white rounded-lg hover:from-green-700 hover:to-green-500 transform hover:-translate-y-0.5 transition duration-200"
           >
             양식 제출
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
