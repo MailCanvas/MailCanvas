@@ -85,7 +85,10 @@ export default function Home() {
         </div>
 
         {/* 메일 리스트 */}
-        <div id="wrap-panel" className="flex flex-wrap gap-5 justify-center">
+        <div
+          id="scrollbar-1"
+          className="flex flex-wrap gap-5 justify-center h-[85vh] overflow-y-auto"
+        >
           {data.pages
             .flatMap((page) => page.forms)
             .filter((el: Form) => el.Title.includes(title))
