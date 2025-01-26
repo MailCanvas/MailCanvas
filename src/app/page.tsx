@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import { useGetForms } from "@/hooks/queries";
+import { useSearchParams } from "next/navigation";
 import MailCard from "@/components/ui/MailCard";
 import Search from "@/components/ui/Search";
 import ClosedNavigation from "@/components/ui/Navigation/ClosedNavigation";
@@ -16,6 +17,10 @@ export default function Home() {
   const [IsNavBarOpen, setIsNavBarOpen] = useState<boolean>(true);
   const loader = useRef<IntersectionObserver | null>(null);
 
+  const searchParams = useSearchParams();
+
+  const tag = searchParams.get("tag");
+
   const {
     data,
     fetchNextPage,
@@ -23,7 +28,7 @@ export default function Home() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useGetForms({ sortByCopyCount });
+  } = useGetForms({ sortByCopyCount, tag });
 
   if (status === "pending") return <Loading />;
   if (status === "error") return <div>500 데이터를 불러오지 못했습니다.</div>;

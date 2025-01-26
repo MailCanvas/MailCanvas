@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface ChipProps {
   tag: string;
@@ -13,11 +14,20 @@ const Chip: React.FC<ChipProps> = ({ tag, useLink }) => {
     </span>
   );
 
+  const handleClick = () => {
+    // 페이지를 강제로 리로드하면서 쿼리 파라미터 변경
+    window.location.href = `/?tag=${tag}`;
+  };
+
   return (
     <>
       {useLink ? (
-        <Link href={{ pathname: "/", query: { tag } }}>{chipContent}</Link>
+        // useLink가 true일 때 링크 클릭 시 강제로 리로드
+        <button onClick={handleClick} className="text-green-800">
+          {chipContent}
+        </button>
       ) : (
+        // useLink가 false일 때는 span만 렌더링
         chipContent
       )}
     </>

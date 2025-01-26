@@ -17,6 +17,7 @@ const ITEMS_PER_PAGE = 12;
 
 type GetDataProps = {
   sortByCopyCount: boolean;
+  tag: string;
 };
 
 type PageParam = {
@@ -30,7 +31,7 @@ type GetFormsResponseType = {
   lastDoc: DocumentData | null;
 };
 
-export function useGetForms({ sortByCopyCount }: GetDataProps) {
+export function useGetForms({ sortByCopyCount, tag }: GetDataProps) {
   return useInfiniteQuery({
     queryKey: ["forms", sortByCopyCount],
     queryFn: async ({
@@ -56,7 +57,8 @@ export function useGetForms({ sortByCopyCount }: GetDataProps) {
         const formsQuery = query(
           collection(db, "forms"),
           where("IsValid", "==", true),
-          ...queryConstraints
+          ...queryConstraints,
+          ...(tag ? [where("tags", "array-contains", tag)] : [])
         );
 
         // Get the documents
