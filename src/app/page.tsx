@@ -5,6 +5,7 @@ import MailCard from "@/components/ui/MailCard";
 import Search from "@/components/ui/Search";
 import ClosedNavigation from "@/components/ui/Navigation/ClosedNavigation";
 import OpenedNavigation from "@/components/ui/Navigation/OpenedNavigation";
+import Loading from "./loading";
 import { Form } from "@/types/types";
 export default function Home() {
   // const title, tags, sortByCopyCount
@@ -23,7 +24,7 @@ export default function Home() {
     status,
   } = useGetForms({ sortByCopyCount });
 
-  if (status === "pending") return <div>Loading...</div>;
+  if (status === "pending") return <Loading />;
   if (status === "error") return <div>Error loading posts</div>;
 
   const fetchWithDelay = () => {
