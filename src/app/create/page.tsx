@@ -76,7 +76,6 @@ const BlogPostForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ title, content, email, name, tags, replacements });
     const _data = {
       content: content,
       email: email,
@@ -96,10 +95,7 @@ const BlogPostForm = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-pink-50 p-6">
       <div className="max-w-3xl mx-auto">
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-6 bg-white rounded-2xl shadow-xl p-8"
-        >
+        <div className="space-y-6 bg-white rounded-2xl shadow-xl p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
             새 양식 작성하기
           </h1>
@@ -295,11 +291,12 @@ const BlogPostForm = () => {
           {/* Submit Button */}
           <button
             type="submit"
+            onClick={handleSubmit}
             className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-green-300 text-white rounded-lg hover:from-green-700 hover:to-green-500 transform hover:-translate-y-0.5 transition duration-200"
           >
             양식 제출
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
