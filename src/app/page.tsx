@@ -101,6 +101,10 @@ export default function Home() {
                 writer={form.Writer}
               />
             ))}
+          <div
+            ref={observer}
+            className="my-3 flex w-full items-center justify-center text-2xl"
+          />
         </div>
       </div>
     </div>
