@@ -27,11 +27,12 @@ export default function Home() {
     fetchNextPage,
     hasNextPage,
     isFetching,
+    isLoading,
     isFetchingNextPage,
     status,
   } = useGetForms({ sortByCopyCount, tag });
 
-  if (status === "pending") return <Loading />;
+  if (isLoading) return <Loading />;
   if (status === "error") return <div>500 데이터를 불러오지 못했습니다.</div>;
 
   const fetchWithDelay = () => {
