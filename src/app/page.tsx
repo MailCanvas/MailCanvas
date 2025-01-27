@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useGetForms } from "@/hooks/queries";
 import { useSearchParams } from "next/navigation";
 import MailCard from "@/components/ui/MailCard";
