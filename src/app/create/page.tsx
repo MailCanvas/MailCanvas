@@ -142,7 +142,7 @@ const BlogPostForm = () => {
                   {filteredTags.map((tag, index) => (
                     <div
                       key={index}
-                      className="p-2 cursor-pointer hover:bg-gray-100 rounded-md"
+                      className="p-2 cursor-pointer hover:bg-gray-100 rounded-md text-black"
                       onClick={() => handleAddTagDirectly(tag)} // 클릭 시 태그를 입력란에 넣기
                     >
                       {tag}
