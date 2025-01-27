@@ -278,7 +278,7 @@ const BlogPostForm = () => {
                 placeholder="이메일을 입력하세요"
               />
             </div>
-            <div className="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+            <div className="flex items-center ps-4 border border-gray-200 rounded">
               <div className="inline-flex items-center">
                 <label className="flex items-center cursor-pointer relative">
                   <input
@@ -306,7 +306,7 @@ const BlogPostForm = () => {
                   </span>
                 </label>
               </div>
-              <label className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              <label className="w-full py-4 ms-2 text-sm font-medium text-gray-900">
                 사용자들에게 이메일을 공개하여 폼에 대한 피드백을 받습니다.
               </label>
             </div>
