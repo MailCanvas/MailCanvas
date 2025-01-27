@@ -18,7 +18,7 @@ export default function RQProvider({ children }: Readonly<Props>) {
             refetchOnWindowFocus: true,
           },
         },
-      }),
+      })
   );
 
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
