@@ -92,7 +92,7 @@ export default function Home() {
           className="flex flex-wrap gap-5 content-start justify-center h-[85vh] overflow-y-auto pt-5"
         >
           {data.pages
-            .flatMap((page) => page.forms)
+            .flatMap((page: any) => page.forms)
             .filter((el: Form) => el.Title.includes(title))
             .map((form, idx) => (
               <MailCard
