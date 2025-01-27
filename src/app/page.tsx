@@ -87,7 +87,7 @@ export default function Home() {
         {/* 메일 리스트 */}
         <div
           id="scrollbar-1"
-          className="flex flex-wrap gap-5 content-start justify-center h-[85vh] overflow-y-auto"
+          className="flex flex-wrap gap-5 content-start justify-center h-[85vh] overflow-y-auto pt-5"
         >
           {data.pages
             .flatMap((page) => page.forms)
