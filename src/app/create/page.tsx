@@ -184,7 +184,7 @@ const BlogPostForm = () => {
               <label className="block text-sm font-medium text-gray-700">
                 치환 태그
               </label>
-              <Tooltip text="explain text">
+              <Tooltip text="치환 태그를 추가한 후, 생성된 치환태그를 클릭해 양식에 적용할 수 있습니다">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
