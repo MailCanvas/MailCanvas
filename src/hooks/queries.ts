@@ -81,7 +81,6 @@ export function useGetForms({ sortByCopyCount, tag }: GetDataProps) {
           lastDoc,
         };
       } catch (error) {
-        console.error("Error fetching forms:", error);
         throw error;
       }
     },
