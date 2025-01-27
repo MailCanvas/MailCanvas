@@ -19,6 +19,8 @@ const CopyButton = ({ id, data }: { data: string; id: string }) => {
           // Atomically increment the population of the city by 50.
           await updateDoc(docRef, {
             CopiedCount: increment(1),
+          }).then(() => {
+            setCopied(false);
           });
         }
       }}
