@@ -12,14 +12,15 @@ import { Form } from "@/types/types";
 export default function Home() {
   // const title, tags, sortByCopyCount
   const [title, setTitle] = useState<string>("");
-  const [tags, setTags] = useState<string[]>([]);
+  // TODO: adjust the code below + sort?
+  // const [tags, setTags] = useState<string[]>([]);
   const [sortByCopyCount, setSortByCopyCount] = useState<boolean>(true);
   const [IsNavBarOpen, setIsNavBarOpen] = useState<boolean>(true);
   const loader = useRef<IntersectionObserver | null>(null);
 
   const searchParams = useSearchParams();
 
-  const tag = searchParams.get("tag");
+  const tag = searchParams.get("tag") || "";
 
   const {
     data,

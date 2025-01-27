@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { createForm } from "./_lib/lib";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import RecommendedTags from "@/lib/recommended_tags";
 import Tooltip from "@/components/ui/ToolTip";
 

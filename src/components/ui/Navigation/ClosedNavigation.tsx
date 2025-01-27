@@ -6,7 +6,6 @@ const ClosedNavigation: React.FC<ClosedNavigationProps> = ({
   setIsNavBarOpen,
 }) => {
   return (
-    
     <button
       type="button"
       className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none 
