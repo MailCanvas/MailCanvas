@@ -8,7 +8,7 @@ const OpenedNavigation: React.FC<OpenedNavigationProps> = ({
   setIsNavBarOpen,
 }) => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       {/* Header */}
       <div className="hidden md:flex justify-end align-top">
         <button
