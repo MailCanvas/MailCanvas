@@ -9,7 +9,7 @@ const Footer = () => {
     {
       name: "문태주",
       department: "데이터사이언스융합전공",
-      email: "po2lycee@naver.com",
+      email: "pp2lycee@naver.com",
       github: "taeju-moon",
     },
   ];
