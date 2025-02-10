@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import CopyButton from "../_components/CopyButton";
 import Chip from "@/components/ui/Chip";
 
-export function DetailPage({ initialData }: { initialData: Form }) {
+export function DetailPage({
+  initialData,
+  backgroundImage,
+}: {
+  initialData: Form;
+  backgroundImage?: string | null;
+}) {
   const [replacements, setReplacements] = useState<{ [key: string]: string }>(
     {}
   );
@@ -37,7 +43,10 @@ export function DetailPage({ initialData }: { initialData: Form }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-pink-50 p-6">
+    <div
+      className="min-h-screen bg-gradient-to-br from-green-50 to-pink-50 p-6"
+      style={{ backgroundImage: `url('/${backgroundImage}')` }}
+    >
       <div className="max-w-3xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
           {/* Header Section */}
