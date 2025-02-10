@@ -40,7 +40,7 @@ const OpenedNavigation: React.FC<OpenedNavigationProps> = ({
       </div>
 
       {/* Body */}
-      <div className="flex flex-grow justify-center items-center">
+      <div className="flex flex-grow justify-center items-center mt-[-100px]">
         <div className="p-10">
           <h1 className="font-extrabold text-5xl text-center text-slate-100">
             MailCanvas
@@ -48,7 +48,7 @@ const OpenedNavigation: React.FC<OpenedNavigationProps> = ({
           <h3 className="font-bold text-xl text-slate-100">
             어려운 메일보내기를 간편하게
           </h3>
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center">
             <Link href="/create">
               <button
                 className="relative inline-flex items-center 
@@ -59,6 +59,19 @@ const OpenedNavigation: React.FC<OpenedNavigationProps> = ({
               >
                 <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
                   나만의 양식 배포하기
+                </span>
+              </button>
+            </Link>
+            <Link href="/event">
+              <button
+                className="relative inline-flex items-center 
+          justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium 
+          text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300
+           group-hover:from-teal-300 group-hover:to-lime-300 
+            focus:ring-4 focus:outline-none focus:ring-lime-200 mt-2"
+              >
+                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
+                  메일캔버스 X 멋쟁이사자처럼 Event
                 </span>
               </button>
             </Link>
