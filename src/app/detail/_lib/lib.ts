@@ -1,3 +1,6 @@
+import { db } from "@/firebase/firebaseClient";
+import { addDoc, collection } from "firebase/firestore";
+
 export const copyToClipboard = async (text: string) => {
   try {
     await navigator.clipboard.writeText(text);
@@ -5,4 +8,13 @@ export const copyToClipboard = async (text: string) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const creatEventApplies = async (_data: { content: string }) => {
+  const time = new Date();
+  const data = {
+    Content: _data.content,
+  };
+  const res = await addDoc(collection(db, "eventApplies"), data);
+  return res;
 };
