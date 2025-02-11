@@ -32,6 +32,7 @@ export default async function generatePage() {
     <DetailPage
       initialData={formData}
       backgroundImage="likelion_background.png"
+      isForEvent={true}
     />
   );
 }

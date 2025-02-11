@@ -3,14 +3,19 @@ import { Form } from "@/types/types";
 import { useEffect, useState } from "react";
 import CopyButton from "../_components/CopyButton";
 import Chip from "@/components/ui/Chip";
+import { useRouter } from "next/navigation";
+import { creatEventApplies } from "../_lib/lib";
 
 export function DetailPage({
   initialData,
   backgroundImage,
+  isForEvent,
 }: {
   initialData: Form;
   backgroundImage?: string | null;
+  isForEvent?: boolean;
 }) {
+  const router = useRouter();
   const [replacements, setReplacements] = useState<{ [key: string]: string }>(
     {}
   );
@@ -40,6 +45,23 @@ export function DetailPage({
       ...prev,
       [tag]: value,
     }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // 사용자에게 제출 확인을 요청
+    const isConfirmed = window.confirm("양식을 제출하시겠습니까?");
+
+    if (isConfirmed) {
+      const _data = {
+        content: previewContent,
+      };
+
+      creatEventApplies(_data);
+      alert("이벤트 참여가 완료되었습니다!");
+      router.push("/"); // 제출 후 이동
+    }
   };
 
   return (
@@ -130,6 +152,19 @@ export function DetailPage({
               </div>
             </div>
           </div>
+
+          {/* Submit Button If For Event */}
+          {isForEvent ? (
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-green-300 text-white rounded-lg hover:from-green-700 hover:to-green-500 transform hover:-translate-y-0.5 transition duration-200"
+            >
+              이벤트 양식 제출
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
