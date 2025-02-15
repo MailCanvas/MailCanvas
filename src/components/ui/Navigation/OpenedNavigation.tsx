@@ -40,7 +40,7 @@ const OpenedNavigation: React.FC<OpenedNavigationProps> = ({
       </div>
 
       {/* Body */}
-      <div className="flex flex-grow justify-center items-center mt-[-100px]">
+      <div className="flex flex-grow justify-center items-center">
         <div className="p-10">
           <h1 className="font-extrabold text-5xl text-center text-slate-100">
             MailCanvas

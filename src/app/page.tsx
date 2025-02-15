@@ -57,7 +57,7 @@ export default function Home() {
   return (
     <div className="bg-gradient-to-br from-green-50 to-pink-50 md:flex">
       {/* Navigation Bar */}
-      <div className="h-full md:h-screen bg-gradient-to-b from-green-300 to-purple-300">
+      <div className="h-64 md:h-screen bg-gradient-to-b from-green-300 to-purple-300">
         {IsNavBarOpen ? (
           <OpenedNavigation setIsNavBarOpen={setIsNavBarOpen} />
         ) : (
