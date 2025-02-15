@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import MAIL_IMG from "../../../public/mail.png";
 
+import PatchNotesModal from "./Modal/PatchNotesModal";
+
 import fs from "fs";
 import path from "path";
 
@@ -17,9 +19,7 @@ export default function Header() {
       <div className="flex justify-center gap-3">
         <Image src={MAIL_IMG} alt="logo" height={30} />
         <a href="/">MailCanvas</a>
-        <a href="/patch-notes" className="text-sm">
-          ver {getVersion()}
-        </a>
+        <PatchNotesModal version={getVersion()} />
       </div>
     </div>
   );
