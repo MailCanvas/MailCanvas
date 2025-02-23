@@ -6,21 +6,19 @@ const STORAGE_KEY = "notice_popup_closed_date";
 
 const NoticePopup = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dontShowToday, setDontShowToday] = useState(false);
+  const [dontShowAgain, setDontShowAgain] = useState(false);
 
   // 공지 리스트
   const notices = ["- 패치노트 모달 추가", "- 이벤트 페이지 추가"];
 
   useEffect(() => {
-    const savedDate = localStorage.getItem(STORAGE_KEY);
-    const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD 형식
-    setIsOpen(savedDate !== today);
+    const savedVersion = localStorage.getItem(STORAGE_KEY);
+    setIsOpen(savedVersion !== "ver0.2.0");
   }, []);
 
   const handleClose = () => {
-    if (dontShowToday) {
-      const today = new Date().toISOString().split("T")[0];
-      localStorage.setItem(STORAGE_KEY, today);
+    if (dontShowAgain) {
+      localStorage.setItem(STORAGE_KEY, "ver0.2.0");
     }
     setIsOpen(false);
   };
@@ -52,14 +50,14 @@ const NoticePopup = () => {
             type="checkbox"
             id="dont-show-today"
             className="w-5 h-5 mr-3 accent-blue-500"
-            checked={dontShowToday}
-            onChange={(e) => setDontShowToday(e.target.checked)}
+            checked={dontShowAgain}
+            onChange={(e) => setDontShowAgain(e.target.checked)}
           />
           <label
             htmlFor="dont-show-today"
             className="text-base font-medium text-gray-700"
           >
-            오늘 하루 보지 않기
+            다시 보지 않기
           </label>
         </div>
 
