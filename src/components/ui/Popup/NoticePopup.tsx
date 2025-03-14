@@ -13,12 +13,12 @@ const NoticePopup = () => {
 
   useEffect(() => {
     const savedVersion = localStorage.getItem(STORAGE_KEY);
-    setIsOpen(savedVersion !== "ver0.2.0");
+    setIsOpen(false);
   }, []);
 
   const handleClose = () => {
     if (dontShowAgain) {
-      localStorage.setItem(STORAGE_KEY, "ver0.2.0");
+      localStorage.setItem(STORAGE_KEY, "ver0.2.1");
     }
     setIsOpen(false);
   };

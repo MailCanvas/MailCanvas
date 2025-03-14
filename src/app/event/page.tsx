@@ -15,7 +15,16 @@ async function getFormData(id: string) {
 }
 
 export default async function generatePage() {
-  const id = "lMeE2UgWfOMYykJ4fYBH";
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50 p-6 flex items-center justify-center">
+      <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
+        <h1 className="text-4xl font-bold text-red-500">404</h1>
+        <p className="text-gray-600 mt-2">양식을 찾을 수 없습니다</p>
+      </div>
+    </div>
+  );
+
+  const id = "aaa";
   const { formData } = await getFormData(id);
 
   if (!formData) {
